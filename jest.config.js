@@ -19,10 +19,10 @@ const customJestConfig = {
 
   // `moduleNameMapper` でCSS Modulesや静的ファイルなどをモック
   moduleNameMapper: {
-    // CSS Modulesのモック
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    // 画像ファイルなどの静的ファイルのモック
-    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/__mocks__/fileMock.js',
+      // CSS Modulesのモック (一時的にコメントアウト)
+      // '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+      // 画像ファイルなどの静的ファイルのモック (一時的にコメントアウト)
+      // '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/__mocks__/fileMock.js',
     // Next.jsのパスエイリアス (`@/components/*` など) の設定
     // tsconfig.json の paths と合わせる
     '^@/(.*)$': '<rootDir>/src/$1',
