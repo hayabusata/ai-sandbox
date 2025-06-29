@@ -15,7 +15,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pokemon App",
   description: "An application to browse Pokemon data.",
-  icons: "/favicon.ico",
 };
 
 export default function RootLayout({
