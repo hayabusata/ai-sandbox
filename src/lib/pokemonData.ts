@@ -16,11 +16,16 @@ export async function getPokemonStatsList(): Promise<PokemonStats[]> {
       skipEmptyLines: true,
       complete: (results) => {
         const data = results.data;
-        if (data.length < 2) { // ヘッダー行とデータ行が最低でも必要
-          return reject(new Error('CSV data is insufficient.'));
+        // パース結果が空、または最初の行 (ヘッダーを期待) が実質的に空の場合はエラー
+        if (data.length === 0 || (data.length > 0 && data[0].length === 0) || (data.length > 0 && data[0].length > 0 && data[0].every(cell => cell === ''))) {
+          return reject(new Error('CSV data is empty or header is malformed.'));
         }
 
         const header = data[0]; // 実際のヘッダー行
+        // BOM文字が含まれている場合を考慮して、最初のヘッダー要素をトリムする
+        if (header.length > 0 && typeof header[0] === 'string') {
+            header[0] = header[0].replace(/^\uFEFF/, '');
+        }
         const pokemonList: PokemonStats[] = [];
 
         // ヘッダーのインデックスを特定（日本語ヘッダー名を想定）
